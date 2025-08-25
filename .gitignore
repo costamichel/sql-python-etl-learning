@@ -1,0 +1,19 @@
+# Arquivos e pastas ignorados pelo Git
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+*.sqlite3
+*.db
+*.log
+*.csv
+*.xlsx
+*.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.bak
+*.tmp
