@@ -69,4 +69,24 @@ from etl_course.pedidos p
 join etl_course.clientes c on c.id = p.cliente_id 
 order by c.nome, p.data_pedido 
 
--- STOP HERE
+-- Ranking de pedidos por valor - por cada cliente 
+select 
+	c.nome as cliente, 
+	p.valor, 
+	rank() over(partition by p.cliente_id order by p.valor desc) as ranking_cliente, 
+	rank() over(order by valor desc) as ranking_total
+from etl_course.pedidos p
+join etl_course.clientes c on p.cliente_id = c.id
+order by c.nome, ranking_cliente;
+
+-- Verifica e-mails duplicados 
+select c.email 
+from etl_course.clientes c 
+group by c.email 
+having count(*) > 1;
+
+-- Pedidos com clientes inexistente 
+select p.id, p.cliente_id 
+from etl_course.pedidos p  
+left join etl_course.clientes c on c.id = p.cliente_id 
+where c.id is null;
